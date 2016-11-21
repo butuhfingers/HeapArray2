@@ -9,6 +9,9 @@ public class Heap<T extends Comparable<T>> {
     int heapCount;
 
     //Properties
+    public HeapNode<T> Root(){
+        return items[0];
+    }
     private HeapNode<T> LeftChild(HeapNode<T> node){
         if(((node.HeapIndex() * 2) + 1) > items.length)
             return null;
