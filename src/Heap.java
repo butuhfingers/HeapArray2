@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Created by derek on 11/16/16.
  */
@@ -66,6 +68,9 @@ public class Heap<T extends Comparable<T>> {
     }
 
     public void Add(T item){
+        if(heapCount >= items.length)
+            items = GrowArray(items);
+
         //Create a new node and add it
         HeapNode<T> node = CreateNode(item);
         items[heapCount] = node;
@@ -137,5 +142,13 @@ public class Heap<T extends Comparable<T>> {
             HeapNode<T> item = items[i];
             System.out.println("Current Node: " + item.Item().toString() + " --- Parent Node:" + Parent(item).Item().toString());
         }
+    }
+
+    private HeapNode<T>[] GrowArray(HeapNode<T>[] arrayToGrow){
+        HeapNode<T>[] newItems = new HeapNode[arrayToGrow.length * 2];
+
+        newItems = Arrays.copyOf(arrayToGrow, arrayToGrow.length);
+
+        return newItems;
     }
 }

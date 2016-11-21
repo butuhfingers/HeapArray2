@@ -7,12 +7,11 @@ import java.util.Timer;
 public class Driver {
     public static void main(String[] args){
         for(int i = 0;i < 1;i++){
-            RunHeap();
+            RunHeap(10000000);
         }
     }
 
-    public static void RunHeap(){
-        int heapSize = 10000000;
+    public static void RunHeap(int heapSize){
         int heapMultiplier = 5;
 
         Heap<Integer> heap = new Heap<Integer>(heapSize);
