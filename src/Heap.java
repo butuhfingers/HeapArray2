@@ -8,16 +8,28 @@ public class Heap<T extends Comparable<T>> {
 
     //Properties
     private HeapNode<T> LeftChild(HeapNode<T> node){
+        if(((node.HeapIndex() * 2) + 1) > items.length)
+            return null;
+
         return items[(int)(node.HeapIndex() * 2) + 1];
     }
     private int LeftChildIndex(HeapNode<T> node){
+        if(((node.HeapIndex() * 2) + 1) > items.length)
+            return -1;
+
         return (int)(node.HeapIndex() * 2) + 1;
     }
     private HeapNode<T> RightChild(HeapNode<T> node){
+        if(((node.HeapIndex() * 2) + 2) > items.length)
+            return null;
+
         return items[(int)(node.HeapIndex() * 2) + 2];
     }
     private int RightChildIndex(HeapNode<T> node){
-        return (int)(node.HeapIndex() * 2) + 1;
+        if(((node.HeapIndex() * 2) + 2) > items.length)
+            return -1;
+
+        return (int)(node.HeapIndex() * 2) + 2;
     }
     private HeapNode<T> Parent(HeapNode<T> node){
         return items[(int)(node.HeapIndex() - 1) / 2];
@@ -34,6 +46,23 @@ public class Heap<T extends Comparable<T>> {
     //Functions and Methods
     private HeapNode CreateNode(T item){
         return new HeapNode<T>(item);
+    }
+
+    public void Poll(){
+        //Remove the top element
+        Remove(items[0]);
+    }
+
+    private void Remove(HeapNode<T> nodeToRemove){
+        HeapNode<T> bottomNode = items[heapCount - 1];
+
+        Swap(nodeToRemove, bottomNode);
+
+        nodeToRemove = null;
+        heapCount--;
+
+        SortDown(bottomNode);
+        SortUp(bottomNode);
     }
 
     public void Add(T item){

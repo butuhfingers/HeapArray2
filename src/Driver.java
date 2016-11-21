@@ -3,13 +3,23 @@ import java.util.Random;
 /**
  * Created by derek on 11/16/16.
  */
+import java.util.Timer;
 public class Driver {
     public static void main(String[] args){
-        int heapSize = 20;
+        for(int i = 0;i < 1;i++){
+            RunHeap();
+        }
+    }
+
+    public static void RunHeap(){
+        int heapSize = 10000000;
         int heapMultiplier = 5;
 
         Heap<Integer> heap = new Heap<Integer>(heapSize);
         Random random = new Random();
+
+        //Start the timer here
+        long startTime = System.currentTimeMillis();
 
         for(int i = 0;i < heapSize;i++){
             int rand = random.nextInt(heapSize) * heapMultiplier + 1;
@@ -17,7 +27,17 @@ public class Driver {
             //Add to the heap
             heap.Add(new Integer(rand));
         }
+        if(heapSize < 21)
+            heap.Display();
 
-        heap.Display();
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        System.out.println(elapsedTime);
+
+        heap.Poll();
+
+        System.out.println(" ");
+
+        if(heapSize < 21)
+            heap.Display();
     }
 }
